@@ -1,0 +1,18 @@
+{
+	"ImportPath": "github.com/wchan2/bloodhound",
+	"GoVersion": "go1.3.3",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/onsi/ginkgo",
+			"Rev": "1e48048b2e01c7f1830144e30eea21db3cd3b574"
+		},
+		{
+			"ImportPath": "github.com/onsi/gomega",
+			"Comment": "v1.0-28-g8adf9e1",
+			"Rev": "8adf9e1730c55cdc590de7d49766cb2acc88d8f2"
+		}
+	]
+}
