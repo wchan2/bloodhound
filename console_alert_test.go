@@ -22,7 +22,7 @@ var _ = Describe(`ConsoleAlert`, func() {
 		log.SetOutput(buf)
 		log.SetFlags(0)
 
-		consoleAlert = NewConsoleAlert(Threshold{Hits: 2, Duration: 1 * time.Minute})
+		consoleAlert = NewConsoleAlert(NewTotalTrafficThreshold(2, 1*time.Minute))
 	})
 
 	Context(`when there is a single event that does not exceed the threshold`, func() {
