@@ -7,7 +7,9 @@ TBD
 
 ## Dependencies
 
-- [gopacket](https://github.com/google/gopacket)
+- [gopacket](https://github.com/google/gopacket) for packet sniffing
+- [ginkgo](https://github.com/onsi/ginkgo) for BDD style tests
+- [gomega](github.com/onsi/gomega) for matchers used to create assertions in gingko
 
 ## Building 
 
