@@ -20,7 +20,7 @@ Below are some of the extensible components, namely interfaces and what their re
 	- `HTTPTrafficListener` listens to traffic that corresponds to HTTP traffic
 - `SummaryStatistics`
 - `Alert` that determines when to alert
-	- ConsoleAlert alerts to the console
+	- `ConsoleAlert` alerts to the console
 - `Threshold` evaluates whether an event surpasses the threshold or reverts to normal
 	- `TotalTrafficThreshold` keeps track of the total number of events in a given time window
 
