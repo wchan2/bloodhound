@@ -26,6 +26,10 @@ TBD
 
 Below are some of the extensible components, namely interfaces and what their responsibilities are. Under each component are a list of pre-existing components that implements the respective interface.
 
+### Interfaces and Implementations
+
+Components that can be extended or customized to be used in the application.
+
 - `TrafficFilter` decides what messages to filter out and keep
 	- `HTTPTrafficFilter` filters all traffic that are not HTTP traffic
 - `Monitor` monitors traffic
@@ -34,6 +38,18 @@ Below are some of the extensible components, namely interfaces and what their re
 	- `ConsoleAlert` alerts to the console
 - `Threshold` evaluates whether an event surpasses the threshold or reverts to normal
 	- `TotalTrafficThreshold` keeps track of the total number of events in a given time window
+
+## Domain Messages
+
+Messages that are passed from one component to another.
+
+TBD
+
+## Application
+
+Application that listens to network traffic and passes it through a filter, a monitor, a threshold, and eventually an alert if traffic surpasses the threshold.
+
+- `Application` is composed of the different interfaces, namely the `TrafficFilter`, `Monitor`, `Alert`, and `Threshold` to allow custom components to filter for relevant traffic, monitor the filtered traffic, and alert when when the traffic surpasses some threshold
 
 ## Building 
 
