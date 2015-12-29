@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"bytes"
-	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -16,15 +15,9 @@ var HTTPTrafficFilter = NewTrafficFilter(func(packet gopacket.Packet) bool {
 	if appLayer != nil && strings.Contains(string(appLayer.Payload()), "HTTP") {
 		payloadReader := bytes.NewReader(appLayer.Payload())
 		bufferedPayloadReader := bufio.NewReader(payloadReader)
-		req, err := http.ReadRequest(bufferedPayloadReader)
-		fmt.Println(string(appLayer.Payload()))
+		_, err := http.ReadRequest(bufferedPayloadReader)
 		if err != nil && err != io.EOF {
-			fmt.Println(err.Error())
-			fmt.Println("HERE")
 			return false
-		}
-		if err == io.EOF {
-			fmt.Println("REQUEST URI", req.RequestURI)
 		}
 		return true
 	}

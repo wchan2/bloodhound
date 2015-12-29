@@ -2,6 +2,8 @@ language: go
 go:
   - 1.4.2
 install:
+  - sudo apt-get update
+  - sudo apt-get -yqq install libpcap-dev
   - go get github.com/tools/godep
 script:
   - godep go test ./...
