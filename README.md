@@ -34,10 +34,10 @@ Components that can be extended or customized to be used in the application.
 	- `HTTPTrafficFilter` filters all traffic that are not HTTP traffic
 - `Monitor` monitors traffic
 	- `TrafficMonitor` generates statistical summaries for traffic received and sent
-- `Alert` that determines when to alert
-	- `ConsoleAlert` alerts to the console
-- `Threshold` evaluates whether an event surpasses the threshold or reverts to normal
-	- `TotalTrafficThreshold` keeps track of the total number of events in a given time window
+- `Alert` evaluates whether an event surpasses the threshold or reverts to normal
+	- `TotalTrafficAlert` keeps track of the total number of events in a given time window
+- `Notification` that determines when to alert
+	- `ConsoleNotification` alerts to the console
 
 ## Domain Messages
 
@@ -49,7 +49,7 @@ TBD
 
 Application that listens to network traffic and passes it through a filter, a monitor, a threshold, and eventually an alert if traffic surpasses the threshold.
 
-- `Application` is composed of the different interfaces, namely the `TrafficFilter`, `Monitor`, `Alert`, and `Threshold` to allow custom components to filter for relevant traffic, monitor the filtered traffic, and alert when when the traffic surpasses some threshold
+- `Application` is composed of the different interfaces, namely the `TrafficFilter`, `Monitor`, `Alert`, and `Notification` to allow custom components to filter for relevant traffic, monitor the filtered traffic, and alert when when the traffic surpasses some threshold
 
 ## Building 
 
