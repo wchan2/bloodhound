@@ -9,14 +9,6 @@ import (
 	. "github.com/wchan2/bloodhound"
 )
 
-type notificationMock struct {
-	message string
-}
-
-func (s *notificationMock) Send(message string) {
-	s.message = message
-}
-
 var _ = Describe(`TotalTrafficAlert`, func() {
 	var (
 		alert        Alert
