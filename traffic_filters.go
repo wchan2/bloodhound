@@ -3,32 +3,43 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/google/gopacket"
 )
 
-var HTTPTrafficFilter = NewTrafficFilter(func(packet gopacket.Packet) bool {
+var HTTPTrafficFilter = NewTrafficFilter(func(packet gopacket.Packet) (Event, bool) {
 	appLayer := packet.ApplicationLayer()
 	if appLayer != nil && strings.Contains(string(appLayer.Payload()), "HTTP") {
 		payloadReader := bytes.NewReader(appLayer.Payload())
 		bufferedPayloadReader := bufio.NewReader(payloadReader)
-		_, err := http.ReadRequest(bufferedPayloadReader)
+		request, err := http.ReadRequest(bufferedPayloadReader)
 		if err != nil && err != io.EOF {
-			return false
+			return Event{}, true
 		}
-		return true
+		payload, err := ioutil.ReadAll(request.Body)
+		if err != nil {
+			return Event{}, true
+		}
+		return Event{
+			Payload:     payload,
+			Destination: fmt.Sprintf("%s%s", request.Host, request.RequestURI),
+			Time:        time.Now(),
+		}, false
 	}
-	return false
+	return Event{}, true
 })
 
 type TrafficFilter interface {
-	Filter(gopacket.Packet) bool
+	Filter(gopacket.Packet) (Event, bool)
 }
 
-type PacketFilterFn func(gopacket.Packet) bool
+type PacketFilterFn func(gopacket.Packet) (Event, bool)
 
 type trafficFilter struct {
 	packetFilterFn PacketFilterFn
@@ -38,6 +49,6 @@ func NewTrafficFilter(packetFilterFn PacketFilterFn) *trafficFilter {
 	return &trafficFilter{packetFilterFn: packetFilterFn}
 }
 
-func (t *trafficFilter) Filter(packet gopacket.Packet) bool {
+func (t *trafficFilter) Filter(packet gopacket.Packet) (Event, bool) {
 	return t.packetFilterFn(packet)
 }
