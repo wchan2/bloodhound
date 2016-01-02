@@ -20,19 +20,19 @@ var HTTPTrafficFilter = NewTrafficFilter(func(packet gopacket.Packet) (Event, bo
 		bufferedPayloadReader := bufio.NewReader(payloadReader)
 		request, err := http.ReadRequest(bufferedPayloadReader)
 		if err != nil && err != io.EOF {
-			return Event{}, false
+			return Event{}, true
 		}
 		payload, err := ioutil.ReadAll(request.Body)
 		if err != nil {
-			return Event{}, false
+			return Event{}, true
 		}
 		return Event{
 			Payload:     payload,
 			Destination: fmt.Sprintf("%s%s", request.Host, request.RequestURI),
 			Time:        time.Now(),
-		}, true
+		}, false
 	}
-	return Event{}, false
+	return Event{}, true
 })
 
 type TrafficFilter interface {

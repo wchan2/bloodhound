@@ -55,12 +55,12 @@ var _ = Describe(`SummaryStatsTrafficMonitor`, func() {
 			destination2TotalPayload := len(events[2].Payload)
 			destination2AvgPayload := float64(destination2TotalPayload) / 1
 
-			statisticsFormat := "Destination: %s\nAverage Payload: %f\nTotal Payload: %d\n"
+			statisticsFormat := "Destination: %s\nAverage Payload: %f\nTotal Payload: %d\nCount: %d\n"
 
 			Eventually(func() string { return notification.message }, 2*time.Second, 500*time.Millisecond).Should(Equal(strings.Join([]string{
-				fmt.Sprintf(statisticsFormat, "destination1", destination1AvgPayload, destination1TotalPayload),
-				fmt.Sprintf(statisticsFormat, "destination2", destination2AvgPayload, destination2TotalPayload),
-			}, "")))
+				fmt.Sprintf(statisticsFormat, "destination1", destination1AvgPayload, destination1TotalPayload, 2),
+				fmt.Sprintf(statisticsFormat, "destination2", destination2AvgPayload, destination2TotalPayload, 1),
+			}, "\n")))
 		})
 	})
 })

@@ -22,7 +22,7 @@ func main() {
 		Port:             *port,
 	}
 	totalTrafficAlert := NewTotalTrafficAlert(*traffic, time.Duration(*duration)*time.Second, ConsoleNotification)
-	trafficMonitor := NewSummaryStatsTrafficMonitor(time.Duration(*monitor), ConsoleNotification)
+	trafficMonitor := NewSummaryStatsTrafficMonitor(time.Duration(*monitor)*time.Second, ConsoleNotification)
 	app := NewApplication(config, HTTPTrafficFilter, trafficMonitor, totalTrafficAlert)
 	app.Run()
 }

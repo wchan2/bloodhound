@@ -30,8 +30,8 @@ var _ = Describe(`HTTPTrafficFilter`, func() {
 				event, filtered = trafficFilter.Filter(packet)
 			})
 
-			It(`returns true`, func() {
-				Expect(filtered).To(BeTrue())
+			It(`returns false to not be filtered`, func() {
+				Expect(filtered).To(BeFalse())
 			})
 
 			It(`returns a populated event with the current time`, func() {
@@ -56,8 +56,8 @@ var _ = Describe(`HTTPTrafficFilter`, func() {
 				Expect(event).To(Equal(Event{}))
 			})
 
-			It(`returns false`, func() {
-				Expect(filtered).To(BeFalse())
+			It(`returns true to be filtered`, func() {
+				Expect(filtered).To(BeTrue())
 			})
 		})
 	})

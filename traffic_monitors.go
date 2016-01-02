@@ -19,8 +19,8 @@ type TrafficStatistics struct {
 }
 
 func (t *TrafficStatistics) String() string {
-	statisticsFormat := "Destination: %s\nAverage Payload: %f\nTotal Payload: %d\n"
-	return fmt.Sprintf(statisticsFormat, t.Destination, t.AveragePayload, t.TotalPayload)
+	statisticsFormat := "Destination: %s\nAverage Payload: %f\nTotal Payload: %d\nCount: %d\n"
+	return fmt.Sprintf(statisticsFormat, t.Destination, t.AveragePayload, t.TotalPayload, t.Count)
 }
 
 type SummaryStatsTrafficMonitor struct {
@@ -62,7 +62,7 @@ func (s *SummaryStatsTrafficMonitor) summary() string {
 		statistics[i] = statistic.String()
 		i++
 	}
-	return strings.Join(statistics, "")
+	return strings.Join(statistics, "\n")
 }
 
 func (s *SummaryStatsTrafficMonitor) publishStatistics() {
