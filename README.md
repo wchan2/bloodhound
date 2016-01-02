@@ -26,7 +26,7 @@ Running the application with the below command will require building it in [this
 
 Note: the `sudo` may be required to allow the application to listen to the specified network interface.
 
-```bash
+```
 sudo ./bloodhound
 ```
 
@@ -34,7 +34,7 @@ sudo ./bloodhound
 
 Some flags that can be used to customize the application at runtime.
 
-```bash
+```
 # network flags
 - interface - Network interface to listen for packets
 	- default: "en0"
@@ -56,7 +56,7 @@ Some flags that can be used to customize the application at runtime.
 
 Run the below command in the
 
-```bash
+```
 godep go build
 ```
 
@@ -64,7 +64,7 @@ godep go build
 
 Run the below command in the directory of the top most directory of the project.
 
-```bash
+```
 godep go test ./...
 ```
 
