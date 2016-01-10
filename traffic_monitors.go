@@ -78,7 +78,7 @@ func (s *SummaryStatsTrafficMonitor) consumeEvents() {
 		if statistic, ok := s.statistics[event.Destination]; ok {
 			s.statistics[event.Destination] = TrafficStatistics{
 				Destination:    event.Destination,
-				AveragePayload: (statistic.AveragePayload + float64(len(event.Payload))) / float64((statistic.Count + 1)),
+				AveragePayload: (float64(statistic.Count)*statistic.AveragePayload + float64(len(event.Payload))) / float64((statistic.Count + 1)),
 				TotalPayload:   statistic.TotalPayload + int64(len(event.Payload)),
 				Count:          statistic.Count + 1,
 			}
