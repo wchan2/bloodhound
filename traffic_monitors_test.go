@@ -2,7 +2,6 @@ package main_test
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	. "github.com/onsi/ginkgo"
@@ -56,11 +55,10 @@ var _ = Describe(`SummaryStatsTrafficMonitor`, func() {
 			destination2AvgPayload := float64(destination2TotalPayload) / 1
 
 			statisticsFormat := "Destination: %s\nAverage Payload: %f\nTotal Payload: %d\nCount: %d\n"
-
-			Eventually(func() string { return notification.message }, 2*time.Second, 500*time.Millisecond).Should(Equal(strings.Join([]string{
-				fmt.Sprintf(statisticsFormat, "destination1", destination1AvgPayload, destination1TotalPayload, 2),
-				fmt.Sprintf(statisticsFormat, "destination2", destination2AvgPayload, destination2TotalPayload, 1),
-			}, "\n")))
+			Eventually(func() string { return notification.message }, 2*time.Second, 500*time.Millisecond).Should(And(
+				ContainSubstring(fmt.Sprintf(statisticsFormat, "destination1", destination1AvgPayload, destination1TotalPayload, 2)),
+				ContainSubstring(fmt.Sprintf(statisticsFormat, "destination2", destination2AvgPayload, destination2TotalPayload, 1)),
+			))
 		})
 	})
 })
